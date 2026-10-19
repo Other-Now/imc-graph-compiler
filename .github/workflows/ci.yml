@@ -1,0 +1,31 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install LLVM/MLIR 20 (Ubuntu noble-updates)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y llvm-20-dev llvm-20-tools libmlir-20-dev mlir-20-tools ninja-build
+      - name: Install CPU PyTorch
+        run: pip install numpy torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple
+      - name: Build imc-opt, lit, differential tests
+        env:
+          LLVM_ROOT: /usr/lib/llvm-20
+          PYTHON: python
+          FUZZ: "200"
+        run: bash scripts/test.sh
+      - name: Fusion report (vs upstream MLIR and TorchInductor)
+        env:
+          LLVM_ROOT: /usr/lib/llvm-20
+          PYTHON: python
+        run: |
+          bash scripts/py.sh -m imc.fusion_report
+          { echo '## Differential tests'; echo '```'; cat results/difftest.txt; echo '```';
+            echo '## Fusion'; cat results/fusion.md; } >> "$GITHUB_STEP_SUMMARY"

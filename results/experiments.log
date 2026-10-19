@@ -1,0 +1,28 @@
+mlp int8, per-tensor weights, min-max activations: 0.5873 (2s)
+mlp int8, per-channel weights, min-max activations: 0.5868 (1s)
+mlp int8, per-channel weights, 99.99th-pct activations: 0.5865 (1s)
+mlp + 8-bit ADC (minmax range), 256-row crossbar: 0.5851 (2s)
+mlp + 8-bit ADC (pct range), 256-row crossbar: 0.5851 (2s)
+mlp + 6-bit ADC (minmax range), 256-row crossbar: 0.5617 (1s)
+mlp + 6-bit ADC (pct range), 256-row crossbar: 0.5713 (1s)
+mlp + 4-bit ADC (minmax range), 256-row crossbar: 0.3365 (1s)
+mlp + 4-bit ADC (pct range), 256-row crossbar: 0.3365 (2s)
+mlp 64x64: {'arrays': 1024, 'tiles': 202, 'fits': True, 'util': 0.9916460396039604, 'adc': 12820, 'mvms': 202, 'reprogram_cells_per_img': 0, 'energy_uj': 0.01088518, 'latency_us': 0.3} acc6 0.5808 acc4 0.4769
+mlp 128x128: {'arrays': 256, 'tiles': 51, 'fits': True, 'util': 0.9819240196078431, 'adc': 6410, 'mvms': 51, 'reprogram_cells_per_img': 0, 'energy_uj': 0.007487879999999999, 'latency_us': 0.3} acc6 0.5809 acc4 0.4269
+mlp 256x256: {'arrays': 64, 'tiles': 14, 'fits': True, 'util': 0.8942522321428571, 'adc': 3210, 'mvms': 14, 'reprogram_cells_per_img': 0, 'energy_uj': 0.005791879999999999, 'latency_us': 0.3} acc6 0.5713 acc4 0.3365
+mlp 512x512: {'arrays': 16, 'tiles': 8, 'fits': True, 'util': 0.3912353515625, 'adc': 1674, 'mvms': 8, 'reprogram_cells_per_img': 0, 'energy_uj': 0.004977799999999999, 'latency_us': 0.3} acc6 0.5803 acc4 0.3654
+mlp 256x64: {'arrays': 256, 'tiles': 51, 'fits': True, 'util': 0.9819240196078431, 'adc': 3210, 'mvms': 51, 'reprogram_cells_per_img': 0, 'energy_uj': 0.005791879999999999, 'latency_us': 0.3} acc6 0.5713 acc4 0.3365
+cnn int8, per-tensor weights, min-max activations: 0.8530 (104s)
+cnn int8, per-channel weights, min-max activations: 0.8529 (103s)
+cnn int8, per-channel weights, 99.99th-pct activations: 0.8538 (75s)
+cnn + 8-bit ADC (minmax range), 256-row crossbar: 0.8506 (88s)
+cnn + 8-bit ADC (pct range), 256-row crossbar: 0.8514 (107s)
+cnn + 6-bit ADC (minmax range), 256-row crossbar: 0.8247 (153s)
+cnn + 6-bit ADC (pct range), 256-row crossbar: 0.8417 (159s)
+cnn + 4-bit ADC (minmax range), 256-row crossbar: 0.1528 (126s)
+cnn + 4-bit ADC (pct range), 256-row crossbar: 0.5226 (81s)
+cnn 64x64: {'arrays': 1024, 'tiles': 150, 'fits': True, 'util': 0.9618229166666666, 'adc': 434196, 'mvms': 9858, 'reprogram_cells_per_img': 0, 'energy_uj': 0.35218694, 'latency_us': 256.2} acc6 0.8468 acc4 0.6612
+cnn 128x128: {'arrays': 256, 'tiles': 45, 'fits': True, 'util': 0.8015190972222223, 'adc': 266250, 'mvms': 6177, 'reprogram_cells_per_img': 0, 'energy_uj': 0.26317556, 'latency_us': 256.2} acc6 0.8465 acc4 0.5876
+cnn 256x256: {'arrays': 64, 'tiles': 25, 'fits': True, 'util': 0.36068359375, 'adc': 182282, 'mvms': 4369, 'reprogram_cells_per_img': 0, 'energy_uj': 0.21867252, 'latency_us': 256.2} acc6 0.8417 acc4 0.5226
+cnn 512x512: {'arrays': 16, 'tiles': 14, 'fits': True, 'util': 0.16101946149553573, 'adc': 115722, 'mvms': 2825, 'reprogram_cells_per_img': 0, 'energy_uj': 0.18339572, 'latency_us': 256.2} acc6 0.8441 acc4 0.5956
+cnn 256x64: {'arrays': 256, 'tiles': 41, 'fits': True, 'util': 0.8797160823170732, 'adc': 182282, 'mvms': 4385, 'reprogram_cells_per_img': 0, 'energy_uj': 0.21867252, 'latency_us': 256.2} acc6 0.8417 acc4 0.5226

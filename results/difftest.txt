@@ -1,0 +1,23 @@
+== fp32 import vs eager PyTorch (rtol 1e-4, atol 1e-5) ==
+mlp          unfused max|diff| 2.50e-06  OK
+mlp          fused   max|diff| 2.50e-06  OK
+cnn          unfused max|diff| 9.54e-06  OK
+cnn          fused   max|diff| 9.54e-06  OK
+transformer  unfused max|diff| 7.15e-07  OK
+transformer  fused   max|diff| 7.15e-07  OK
+== int8 crossbar path vs emulator (bit-exact logits + int32 accumulators) ==
+mlp  rows=256 ideal ADC        imc.matmul=3 qdq-folds=2  BIT-EXACT
+mlp  rows=256 adc 8b/minmax    imc.matmul=3 qdq-folds=2  BIT-EXACT
+mlp  rows=128 adc 6b/minmax    imc.matmul=3 qdq-folds=2  BIT-EXACT
+mlp  rows= 64 adc 4b/pct       imc.matmul=3 qdq-folds=2  BIT-EXACT
+cnn  rows=256 ideal ADC        imc.matmul=6 qdq-folds=5  BIT-EXACT
+cnn  rows=256 adc 8b/minmax    imc.matmul=6 qdq-folds=5  BIT-EXACT
+cnn  rows=128 adc 6b/minmax    imc.matmul=6 qdq-folds=5  BIT-EXACT
+cnn  rows= 64 adc 4b/pct       imc.matmul=6 qdq-folds=5  BIT-EXACT
+== importer rejects what it cannot compile, with a clear message ==
+sigmoid                      OK  node sigmoid: call_function 'sigmoid' is not supported (supported: linear, conv2d, relu, add, mul, flatten, max_pool2d, matmul, t/transpose, softmax, layer_norm)
+unfolded BatchNorm           OK  node bn1: BatchNorm2d must be folded into the preceding conv first (fxpasses.fold_conv_bn)
+float64 input                OK  input 0 has dtype torch.float64; only float32 inputs are supported
+broadcasting add             OK  node add: add of (4, 3) and (3,); implicit broadcasting is not supported
+== random FX graphs: 200 graphs x (unfused, fused) ==
+400/400 passed in 198s

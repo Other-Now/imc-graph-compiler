@@ -1,0 +1,12 @@
+set(LLVM_TARGET_DEFINITIONS ImcOps.td)
+mlir_tablegen(ImcOps.h.inc -gen-op-decls)
+mlir_tablegen(ImcOps.cpp.inc -gen-op-defs)
+mlir_tablegen(ImcTypes.h.inc -gen-typedef-decls -typedefs-dialect=imc)
+mlir_tablegen(ImcTypes.cpp.inc -gen-typedef-defs -typedefs-dialect=imc)
+mlir_tablegen(ImcDialect.h.inc -gen-dialect-decls -dialect=imc)
+mlir_tablegen(ImcDialect.cpp.inc -gen-dialect-defs -dialect=imc)
+add_public_tablegen_target(ImcIncGen)
+
+set(LLVM_TARGET_DEFINITIONS ImcPasses.td)
+mlir_tablegen(ImcPasses.h.inc -gen-pass-decls -name Imc)
+add_public_tablegen_target(ImcPassesIncGen)
